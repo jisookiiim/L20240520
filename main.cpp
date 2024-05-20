@@ -1,120 +1,58 @@
 #include <iostream>
-#include <string>
 
-using namespace std; 
-
-int PlayerCard[10] = { 0, };
-int ComputerCard[10] = { 0, };
-
-int PlayerTotal = 0; 
-int ComputerTotal = 0; 
-
-int Cards[52] = { 0, };
-
-string CardType[4] = {"◆", "♠", "♣", "♥"};
+using namespace std;
 
 
-void Shuffle()
+//custom DataType
+struct Vector2D
 {
-	for (int i = 0; i < 52; i++)
-	{
-		Cards[i] = i;
-	}
-	for (int i = 0; i < 10000; i++)
-	{
-		int FirstCard = rand() % 52; 
-		int SecondCard = rand() % 52;
-		int Temp = Cards[FirstCard]; 
-		Cards[FirstCard] = Cards[SecondCard]; 
-		Cards[SecondCard] = Temp; 
+	int X;
+	int Y;
+	//int는 4바이트 = 8바이트 
+};
 
-	}
-	
-}
-
-int DefineType(int CardNumber)
+struct Actor
 {
-	return CardNumber / 13;
+	Vector2D Position;
+	char Shape; 
+	string name; 
+};
 
-}
-
-int DefineCard(int CardNumber)
+struct Color
 {
-	return ((CardNumber % 12) + 1);
-}
+	unsigned char R; 
+	unsigned char G;
+	unsigned char B;
+	//3바이트 
+};
 
-void DrawCard()
+
+struct Color
 {
-	int CardCount = 0;
-	for (int i = 0; i < 2; i++)
-	{
-		PlayerCard[i] = Cards[CardCount]; 
-		PlayerTotal += DefineCard(PlayerCard[i]);
-		CardCount++;
-	}
+	float R; 
+	float G;
+	float B;
+};
 
-	for (int i = 0; i < 2; i++)
-	{
-		ComputerCard[i] = Cards[CardCount];
-		ComputerTotal += DefineCard(ComputerCard[i]);
-		CardCount++;
-	}
-	
-}
-
-void DetermineGame()
+struct World
 {
-
-	if (ComputerTotal > 21)
-	{
-		cout << "You Win" << endl;
-	}
-	else if (ComputerTotal <= 21 && PlayerTotal > 21)
-	{
-		cout << "You Lose" << endl;
-	}
-	else //(ComputerTotal <= 21 && PlayerTotal <= 21)
-	{
-		if (ComputerTotal > PlayerTotal)
-		{
-			cout << "You Lose" << endl;
-		}
-		else
-		{
-			cout << "You Win" << endl;
-		}
-	}
-}
-
-void ShowCard()
-{
-
-
-	cout << "Player" << endl;
-	for (int i = 0; i < 2; i++)
-	{
-		cout << CardType[DefineType(PlayerCard[i])];
-		cout << DefineCard(PlayerCard[i]) << endl;
-
-	}
-
-	cout << "Computer" << endl;
-	for (int i = 0; i < 2; i++)
-	{
-		cout << CardType[DefineType(ComputerCard[i])];
-		cout << DefineCard(ComputerCard[i]) << endl;
-	}
-
-}
+	Actor* 
+};
 
 int main()
 {
-	srand(unsigned int((time_t*)nullptr)); 
+	Actor* Player = new Actor;
 
-	Shuffle();
-	DrawCard(); 
-	ShowCard();
-	DetermineGame();
+	(*Player).Position.X;
+	Player->Position.X = 10;
+	Player->Position.Y = 10;
+	Player->Shape = 'P';
+	Player->name = "바보";
+
+	cout << Player->Position.X << endl;
+
+	delete Player;
 
 	return 0;
 }
+
